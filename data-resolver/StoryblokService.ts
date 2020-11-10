@@ -1,11 +1,10 @@
 import { SearchQuery } from 'storefront-query-builder'
-import config from 'config'
 import { quickSearchByQuery, isOnline } from '@vue-storefront/core/lib/search'
 import { StorageManager } from '@vue-storefront/core/lib/storage-manager'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import { entityKeyName } from '@vue-storefront/core/lib/store/entities'
 import { KEY } from '../index'
-import { canCache, getOptimizedFields, storeStoryToCache } from '../helpers'
+import { canCache, getOptimizedFields, storeStoryToCache, getIndexName, getEntityType } from '../helpers'
 import { StoryblokDataResolver } from '../types/StoryblokDataResolver'
 import Story from '../types/Story'
 
@@ -28,9 +27,9 @@ const getStories = async ({
     query,
     start,
     size,
-    entityType: 'story',
+    entityType: getEntityType(),
     sort,
-    index: config.storyblok.index || 'storyblok_stories',
+    index: getIndexName(),
     excludeFields: excluded,
     includeFields: included
   })

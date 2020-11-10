@@ -3,6 +3,9 @@ import config from 'config'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import { StorageManager } from '@vue-storefront/core/lib/storage-manager'
 import { entityKeyName } from '@vue-storefront/core/lib/store/entities'
+import { currentStoreView } from '@vue-storefront/core/lib/multistore'
+import { processURLAddress } from '@vue-storefront/core/helpers'
+import getApiEndpointUrl from '@vue-storefront/core/helpers/getApiEndpointUrl'
 import { KEY } from '../index'
 
 export const canCache = ({ includeFields, excludeFields }) => {
@@ -59,4 +62,16 @@ export const setRequestCacheTags = ({ stories = [] }) => {
       Vue.prototype.$cacheTags.add(`SB${story.uuid}`);
     })
   }
+}
+
+export const getElasticHost = () => {
+  return processURLAddress(config.storyblok.elasticsearchHost) || processURLAddress(getApiEndpointUrl(currentStoreView().elasticsearch, 'host'))
+}
+
+export const getIndexName = () => {
+  return config.storyblok.index || 'storyblok_stories'
+}
+
+export const getEntityType = () => {
+  return config.storyblok.entity || 'story'
 }

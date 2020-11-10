@@ -65,7 +65,7 @@ export const setRequestCacheTags = ({ stories = [] }) => {
 }
 
 export const getElasticHost = () => {
-  return processURLAddress(config.storyblok.elasticsearchHost) || processURLAddress(getApiEndpointUrl(currentStoreView().elasticsearch, 'host'))
+  return config.storyblok.elasticsearchHost ? processURLAddress(config.storyblok.elasticsearchHost) : processURLAddress(getApiEndpointUrl(currentStoreView().elasticsearch, 'host'))
 }
 
 export const getIndexName = () => {

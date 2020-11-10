@@ -100,7 +100,7 @@ const actions: ActionTree<any, RootState> = {
       resultQuery = new SearchQuery()
     }
 
-    resultQuery = resultQuery.applyFilter({ key: 'folder', value: { 'eq': folder } })
+    resultQuery = resultQuery.applyFilter({ key: 'folder.keyword', value: { 'eq': folder } })
 
     return dispatch('findStories', {
       query: resultQuery,
